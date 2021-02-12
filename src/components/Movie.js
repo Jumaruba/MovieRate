@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { getMovies } from '../services/fakeMovieService';
 import Like from './Like';
-import Pagination from './common/pagination'; 
+import Pagination from './common/pagination';
+import paginate from '../utils/paginate';
 
 class Movie extends Component {
     state = {
@@ -11,28 +12,31 @@ class Movie extends Component {
 
     }
 
-    render() { 
-        const { length:count } = this.state.movies; 
-        const { pageSize, currentPage} = this.state; 
+    render() {
+        const { length: count } = this.state.movies;
+        const { pageSize, currentPage } = this.state;
         return (
-            <React.Fragment> 
-                {count === 0 ? <p>No movies to display yet</p> : this.displayMovieTable()}   
-                <Pagination 
-                    itemsCount={count} 
-                    pageSize={pageSize} 
-                    onPageChange={this.handlePageChange} 
+            <React.Fragment>
+                {count === 0 ? <p>No movies to display yet</p> : this.displayMovieTable()}
+                <Pagination
+                    itemsCount={count}
+                    pageSize={pageSize}
+                    onPageChange={this.handlePageChange}
                     currentPage={currentPage}
-                /> 
+                />
             </React.Fragment>
         );
     }
 
     displayMovieTable() {
+        const { movies, pageSize, currentPage } = this.state;
+        const paginatedMovies = paginate(movies, currentPage, pageSize); 
+
         return (
             <table className="table">
                 {this.displayMovieHeader()}
                 <tbody>
-                    {this.state.movies.map(movie => this.displayMovieBody(movie))}
+                    {paginatedMovies.map(movie => this.displayMovieBody(movie))}
                 </tbody>
             </table>
         );
@@ -50,7 +54,7 @@ class Movie extends Component {
             </tr>
 
         </thead>;
-    } 
+    }
 
     displayMovieBody(movie) {
         const { _id, title, genre, numberInStock, dailyRentalRate } = movie;
@@ -90,8 +94,8 @@ class Movie extends Component {
         this.setState({ movies });
     }
 
-    handlePageChange = page => { 
-        this.setState({ currentPage: page }); 
+    handlePageChange = page => {
+        this.setState({ currentPage: page });
     }
 
 }
