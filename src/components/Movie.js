@@ -10,10 +10,10 @@ import { map } from 'lodash';
 class Movie extends Component {
     state = {
         movies: getMovies(),
-        genres: [{id:"0", name:"All Genres"}].concat(getGenres()), 
+        genres: [{_id:"0", name:"All Genres"}].concat(getGenres()), 
         pageSize: 4,
         currentPage: 1,
-        currentGenre: "All"
+        currentGenre: "0"
     }
 
     render() {
@@ -23,8 +23,8 @@ class Movie extends Component {
             <React.Fragment>
                 <Genres
                     genres={genres}
-                    currenGenre={currentGenre}
-                    onGenreChange={() => this.handleGenreChange}
+                    currentGenre={currentGenre}
+                    onGenreChange={this.handleGenreChange}
                     style={{ float: "left", width: "20%" }}
                 />
                 {count === 0 ? <p>No movies to display yet</p> : this.displayMovieTable()}
@@ -108,8 +108,8 @@ class Movie extends Component {
         this.setState({ currentPage: page });
     }
 
-    handleGenreChange = genre => {
-        console.log(genre);
+    handleGenreChange = genre => { 
+        this.setState({ currentGenre: genre._id }); 
     }
 
 }
