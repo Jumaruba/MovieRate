@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
+
 
 const Pagination = (props) => {
     const { itemsCount, pageSize, currentPage, onPageChange } = props;
@@ -14,7 +16,7 @@ const Pagination = (props) => {
             <ul className="pagination">
                 {pagesArray.map(page => (
                     <li
-                        className={ page === currentPage ? "page-item active" : "page-item" }
+                        className={page === currentPage ? "page-item active" : "page-item"}
                         key={page}
                         style={{ cursor: "pointer" }}
 
@@ -28,5 +30,13 @@ const Pagination = (props) => {
         </nav >
     );
 }
+
+// Verification
+Pagination.propTypes = {
+    itemsCount: PropTypes.number.isRequired,
+    pageSize: PropTypes.number.isRequired,
+    currentPage: PropTypes.number.isRequired,
+    onPageChange: PropTypes.func.isRequired
+};
 
 export default Pagination;
