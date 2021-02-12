@@ -5,20 +5,20 @@ import Pagination from './common/pagination';
 import paginate from '../utils/paginate';
 import Genres from './common/genres';
 import { getGenres } from '../services/fakeGenreService';
-import { map } from 'lodash';
 
 class Movie extends Component {
     state = {
         movies: getMovies(),
-        genres: [{_id:"0", name:"All Genres"}].concat(getGenres()), 
+        genres: [{ _id: "0", name: "All Genres" }].concat(getGenres()),
         pageSize: 4,
         currentPage: 1,
         currentGenre: "0"
     }
 
     render() {
-        const { length: count } = this.state.movies;
+        const { length: count } = this.getMoviesByGenre();
         const { pageSize, currentPage, currentGenre, genres } = this.state;
+
         return (
             <React.Fragment>
                 <Genres
@@ -38,9 +38,15 @@ class Movie extends Component {
         );
     }
 
+    getMoviesByGenre = () => {
+        const { currentGenre, movies } = this.state;
+        return currentGenre === '0' ? movies : movies.filter(movie => movie.genre._id === currentGenre);
+    } 
+
     displayMovieTable() {
-        const { movies, pageSize, currentPage } = this.state;
-        const paginatedMovies = paginate(movies, currentPage, pageSize);
+        const { pageSize, currentPage } = this.state;
+        const moviesByGenre = this.getMoviesByGenre(); 
+        const paginatedMovies = paginate(moviesByGenre, currentPage, pageSize);
 
         return (
             <table className="table">
@@ -108,9 +114,11 @@ class Movie extends Component {
         this.setState({ currentPage: page });
     }
 
-    handleGenreChange = genre => { 
-        this.setState({ currentGenre: genre._id }); 
+    handleGenreChange = genre => {
+        this.setState({ currentGenre: genre._id });
     }
+
+
 
 }
 

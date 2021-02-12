@@ -9,6 +9,7 @@ const Genres = (props) => {
                     key={genre._id}
                     className={currentGenre === genre._id ? "list-group-item active" : "list-group-item"}
                     onClick={() => onGenreChange(genre)}
+                    style={{cursor:"pointer"}}
                 >
                     {genre.name}
                 </li>
