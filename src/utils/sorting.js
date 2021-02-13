@@ -19,7 +19,7 @@ function partition(items, firstIndex, lastIndex, param){
     // pivot = items[lastIndex];  
     let i = firstIndex - 1; 
     for (let j = 0 ; j < lastIndex - firstIndex; j++){  
-        if (items[j + firstIndex][param] < items[lastIndex][param]){
+        if (getParameter(items, j + firstIndex,param) < getParameter(items, lastIndex, param)){
             i++; 
             swap(items, j + firstIndex, i); 
         }  
@@ -38,9 +38,21 @@ function swap(items, i1, i2){
 
 function isSorted(items, param){ 
     for (let i = 1; i < items.length; i++){ 
-        if (items[i -1][param] > items[i][param]) return false; 
+        if (getParameter(items, i -1, param) > getParameter(items, i, param)) return false; 
     } 
 
     return true; 
+
+} 
+
+
+function getParameter(items, pos, param){
+    let listParameters = param.split(".");  
+    let element = items[pos][listParameters[0]];    
+
+    for (let i = 1; i < listParameters.length; i++)
+        element = element[listParameters[i]]; 
+      
+    return element; 
 
 }
