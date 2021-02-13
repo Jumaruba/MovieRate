@@ -8,11 +8,18 @@ import { getGenres } from '../services/fakeGenreService';
 
 class Movie extends Component {
     state = {
-        movies: getMovies(),
-        genres: [{ _id: "0", name: "All Genres" }].concat(getGenres()),
+        movies: [],
+        genres: [],
         pageSize: 4,
         currentPage: 1,
         currentGenre: "0"
+    }
+
+    componentDidMount() {
+        this.setState({
+            movies: getMovies(),
+            genres: [{ _id: "0", name: "All Genres" }].concat(getGenres())
+        })
     }
 
     render() {
@@ -21,31 +28,39 @@ class Movie extends Component {
 
         return (
             <React.Fragment>
-                <Genres
-                    genres={genres}
-                    currentGenre={currentGenre}
-                    onGenreChange={this.handleGenreChange}
-                    style={{ float: "left", width: "20%" }}
-                />
-                {count === 0 ? <p>No movies to display yet</p> : this.displayMovieTable()}
-                <Pagination
-                    itemsCount={count}
-                    pageSize={pageSize}
-                    onPageChange={this.handlePageChange}
-                    currentPage={currentPage}
-                />
+                <div className="row">
+                    <div className="col-2">
+                        <Genres
+                            genres={genres}
+                            currentGenre={currentGenre} 
+                            onGenreChange={this.handleGenreChange}
+                        />
+                    </div>
+                    <div className="col">
+                        <h1>Movies table</h1>
+                        {count === 0 ? <p>No movies to display yet</p> : this.displayMovieTable()}
+                        <Pagination
+                            itemsCount={count}
+                            pageSize={pageSize}
+                            onPageChange={this.handlePageChange}
+                            currentPage={currentPage}
+                        />
+                    </div>
+
+                </div>
             </React.Fragment>
+
         );
     }
 
     getMoviesByGenre = () => {
         const { currentGenre, movies } = this.state;
         return currentGenre === '0' ? movies : movies.filter(movie => movie.genre._id === currentGenre);
-    } 
+    }
 
     displayMovieTable() {
         const { pageSize, currentPage } = this.state;
-        const moviesByGenre = this.getMoviesByGenre(); 
+        const moviesByGenre = this.getMoviesByGenre();
         const paginatedMovies = paginate(moviesByGenre, currentPage, pageSize);
 
         return (
