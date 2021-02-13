@@ -2,17 +2,18 @@ import React from 'react';
 import Like from './Like'; 
 
 const MoviesTable = (props) => {
-    const { movies, onDelete, onLike } = props;
+    const { movies, onDelete, onLike, onSort } = props;
     
     if (movies.length === 0 ) return (<p> No movies to display!</p>)
+
     return (
         <table className="table">
             <thead>
                 <tr>
-                    <th scope="col">Title</th>
-                    <th scope="col">Genre</th>
-                    <th scope="col">In Stock</th>
-                    <th scope="col">Rate</th>
+                    <th onClick={() => onSort('title')}>Title</th>
+                    <th onClick={() => onSort('genre.name')}>Genre</th>
+                    <th onClick={() => onSort('numberInStock')}>In Stock</th>
+                    <th onClick={() => onSort('dailyRentalRate')}>Rate</th>
                     <th> </th>
                     <th> </th>
                 </tr>
