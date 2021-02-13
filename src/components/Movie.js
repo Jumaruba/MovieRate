@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { getMovies } from '../services/fakeMovieService';
-import Like from './Like';
 import Pagination from './common/pagination';
 import paginate from '../utils/paginate';
 import Genres from './common/genres';
 import { getGenres } from '../services/fakeGenreService';
+import MoviesTable from './moviesTable';
 
 class Movie extends Component {
     state = {
@@ -24,21 +24,29 @@ class Movie extends Component {
 
     render() {
         const { length: count } = this.getMoviesByGenre();
-        const { pageSize, currentPage, currentGenre, genres } = this.state;
+        const { pageSize, currentPage, currentGenre, genres } = this.state; 
+
+        const moviesByGenre = this.getMoviesByGenre();
+        const movies = paginate(moviesByGenre, currentPage, pageSize); 
 
         return (
             <React.Fragment>
                 <div className="row">
-                    <div className="col-2">
+                    <div className="col-3">
                         <Genres
                             genres={genres}
                             currentGenre={currentGenre} 
                             onGenreChange={this.handleGenreChange}
                         />
-                    </div>
+                    </div> 
+                    
                     <div className="col">
-                        <h1>Movies table</h1>
-                        {count === 0 ? <p>No movies to display yet</p> : this.displayMovieTable()}
+                        <h1>Movies table</h1> 
+                        <MoviesTable 
+                            movies={movies}
+                            onLike={this.handleLike} 
+                            onDelete={this.handleDelete}
+                        /> 
                         <Pagination
                             itemsCount={count}
                             pageSize={pageSize}
@@ -57,59 +65,6 @@ class Movie extends Component {
         const { currentGenre, movies } = this.state;
         return currentGenre === '0' ? movies : movies.filter(movie => movie.genre._id === currentGenre);
     }
-
-    displayMovieTable() {
-        const { pageSize, currentPage } = this.state;
-        const moviesByGenre = this.getMoviesByGenre();
-        const paginatedMovies = paginate(moviesByGenre, currentPage, pageSize);
-
-        return (
-            <table className="table">
-                {this.displayMovieHeader()}
-                <tbody>
-                    {paginatedMovies.map(movie => this.displayMovieBody(movie))}
-                </tbody>
-            </table>
-        );
-    }
-
-    displayMovieHeader() {
-        return <thead>
-            <tr>
-                <th scope="col">Title</th>
-                <th scope="col">Genre</th>
-                <th scope="col">In Stock</th>
-                <th scope="col">Rate</th>
-                <th> </th>
-                <th> </th>
-            </tr>
-
-        </thead>;
-    }
-
-    displayMovieBody(movie) {
-        const { _id, title, genre, numberInStock, dailyRentalRate } = movie;
-
-        return (
-            <tr key={_id}>
-                <td>{title}</td>
-                <td>{genre.name}</td>
-                <td>{numberInStock}</td>
-                <td>{dailyRentalRate}</td>
-                <td> <Like
-                    liked={movie.liked}
-                    onClick={() => this.handleLike(movie)} /> </td>
-                <td><button
-                    type="button"
-                    className="btn btn-danger"
-                    onClick={() => this.handleDelete(movie)}
-                >
-                    Delete
-                </button> </td>
-            </tr>
-        );
-    }
-
 
 
     handleLike = movie => {
