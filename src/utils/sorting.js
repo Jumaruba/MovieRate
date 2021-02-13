@@ -1,3 +1,11 @@
+/**
+ *  This function is responsible for calling the quickSort and
+ *  reverse the sorting if the order is "asc".
+ *  @param items - Items to be sorted 
+ *  @param param - Parameters chosen to be sorted by. Nested parameters must be divided by "."
+ *  @param order - "asc" if ascending order. "desc" is descending order. 
+ */ 
+
 export default function handleQuickSort(items, param, order){  
     let copyItems = items.slice(); 
     quickSort(copyItems, 0, items.length-1, param); 
@@ -7,7 +15,7 @@ export default function handleQuickSort(items, param, order){
 } 
 
 function quickSort(items, firstIndex, lastIndex, param){  
-
+    // We save processing by checking if the array is sorted. 
     if (items.length === 0 || isSorted(items, param)) return items.slice(firstIndex, lastIndex); 
     let arrayRight, arrayLeft;  
     let pivotIndex;  
@@ -23,11 +31,11 @@ function quickSort(items, firstIndex, lastIndex, param){
     return [...arrayLeft, items[pivotIndex], ...arrayRight];
 } 
 
-function partition(items, firstIndex, lastIndex, param){  
-    // pivot = items[lastIndex];  
+function partition(items, firstIndex, lastIndex, param){   
+
     let i = firstIndex - 1; 
     for (let j = 0 ; j < lastIndex - firstIndex; j++){  
-        if (getParameter(items, j + firstIndex,param) < getParameter(items, lastIndex, param)){
+        if (getAttrByParam(items, j + firstIndex,param) < getAttrByParam(items, lastIndex, param)){
             i++; 
             swap(items, j + firstIndex, i); 
         }  
@@ -46,7 +54,7 @@ function swap(items, i1, i2){
 
 function isSorted(items, param){ 
     for (let i = 1; i < items.length; i++){ 
-        if (getParameter(items, i -1, param) > getParameter(items, i, param)) return false; 
+        if (getAttrByParam(items, i -1, param) > getAttrByParam(items, i, param)) return false; 
     } 
 
     return true; 
@@ -54,7 +62,7 @@ function isSorted(items, param){
 } 
 
 
-function getParameter(items, pos, param){
+function getAttrByParam(items, pos, param){
     let listParameters = param.split(".");  
     let element = items[pos][listParameters[0]];    
 
