@@ -7,6 +7,7 @@ import { getGenres } from '../services/fakeGenreService';
 import MoviesTable from './moviesTable';
 import quickSort from '../utils/sorting'; 
 import _ from 'lodash'; 
+import handleQuickSort from '../utils/sorting';
 
 
 class Movie extends Component {
@@ -67,9 +68,9 @@ class Movie extends Component {
         const { length: count } = this.getMoviesByGenre();
         const { pageSize, currentPage, currentGenre, genres, sortColumn } = this.state; 
 
-        let moviesByGenre = this.getMoviesByGenre();   
-        quickSort(moviesByGenre, 0, moviesByGenre.length-1, sortColumn.path);   
-        const movies = paginate(moviesByGenre, currentPage, pageSize); 
+        let moviesByGenre = this.getMoviesByGenre();    
+        const sortedMovies = handleQuickSort(moviesByGenre, sortColumn.path, sortColumn.order); 
+        const movies = paginate(sortedMovies, currentPage, pageSize); 
 
         return (
             <React.Fragment>

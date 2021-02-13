@@ -1,4 +1,12 @@
-export default function quickSort(items, firstIndex, lastIndex, param){  
+export default function handleQuickSort(items, param, order){  
+    let copyItems = items.slice(); 
+    quickSort(copyItems, 0, items.length-1, param); 
+    if (order === "asc") 
+        return copyItems; 
+    return copyItems.reverse(); 
+} 
+
+function quickSort(items, firstIndex, lastIndex, param){  
 
     if (items.length === 0 || isSorted(items, param)) return items.slice(firstIndex, lastIndex); 
     let arrayRight, arrayLeft;  
