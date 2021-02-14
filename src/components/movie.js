@@ -29,7 +29,13 @@ class Movie extends Component {
         const { currentGenre, movies } = this.state;
         return currentGenre === '0' ? movies : movies.filter(movie => movie.genre._id === currentGenre);
     }
+    getPageData = (sortColumn, currentPage, pageSize) => {
+        let moviesByGenre = this.getMoviesByGenre();    
+        const sortedMovies = handleQuickSort(moviesByGenre, sortColumn.path, sortColumn.order); 
+        return paginate(sortedMovies, currentPage, pageSize); 
 
+
+    }
     handleSort = sortColumn => {
         this.setState({ sortColumn }); 
     }; 
@@ -59,10 +65,7 @@ class Movie extends Component {
         const { length: count } = this.getMoviesByGenre();
         const { pageSize, currentPage, currentGenre, genres, sortColumn } = this.state; 
 
-        let moviesByGenre = this.getMoviesByGenre();    
-        const sortedMovies = handleQuickSort(moviesByGenre, sortColumn.path, sortColumn.order); 
-        const movies = paginate(sortedMovies, currentPage, pageSize); 
-
+        const movies = this.getPageData(sortColumn,currentPage, pageSize); 
         return (
             <React.Fragment>
                 <div className="row">

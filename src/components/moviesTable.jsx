@@ -22,8 +22,7 @@ class MoviesTable extends Component {
           className="btn btn-danger"
           onClick={() => this.props.onDelete(movie)}
         >
-          {" "}
-          Delete{" "}
+          Delete
         </button>
       ),
     },
