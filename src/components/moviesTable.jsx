@@ -11,11 +11,11 @@ class MoviesTable extends Component {
         { path: 'numberInStock', label: 'In Stock' },
         { path: 'dailyRentalRate', label: 'Rate' },
         { key: 'like', content: movie => <Like liked={movie.liked} onClick={() => this.props.onLike(movie)} /> },
-        { key: 'delete', content: movie => <button type="button" className="btn btn-danger" onClick={() => this.props.onDelete(movie)} > Delete </button>}
+        { key: 'delete', content: movie => <button type="button" className="btn btn-danger" onClick={() => this.props.onDelete(movie)} > Delete </button> }
     ];
 
     render() {
-        const { movies, onDelete, onLike, onSort, sortColumn } = this.props;
+        const { movies, onSort, sortColumn } = this.props;
 
         if (movies.length === 0) return (<p> No movies to display!</p>)
 
@@ -25,22 +25,8 @@ class MoviesTable extends Component {
                     columns={this.columns}
                     sortColumn={sortColumn}
                     onSort={onSort}
-                /> 
-                <TableBody data={movies} columns={this.columns} /> 
-                 {/*<tbody>
-                    {movies.map(movie => (
-                        <tr key={movie._id}>
-                            <td>{movie.title}</td>
-                            <td>{movie.genre.name}</td>
-                            <td>{movie.numberInStock}</td>
-                            <td>{movie.dailyRentalRate}</td>
-                            <td>  </td>
-                            <td>
-                                
-                            </td>
-                        </tr>
-                    ))}
-                </tbody> */ } 
+                />
+                <TableBody data={movies} columns={this.columns} />
             </table>
         );
     }
