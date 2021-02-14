@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {BiSortDown, BiSortUp} from 'react-icons/bi'; 
 // Columns: array 
 // sortColumn: obj
 // onSort: func
@@ -16,6 +16,14 @@ class TableHeader extends Component {
         this.props.onSort(sortColumn)
     }
 
+    renderSortIcon = column => { 
+        const { sortColumn } = this.props; 
+        if (column.path !== sortColumn.path ) return null; 
+        if (sortColumn.order === 'asc') return <BiSortUp/>   
+        return <BiSortDown/>
+
+
+    }
 
     render() {
         return (
@@ -25,9 +33,9 @@ class TableHeader extends Component {
                         <th
                             onClick={() => this.raiseSort(column.path)}
                             key={column.path || column.key}
-                            style={{cursor:"pointer"}}
+                            style={{cursor:"pointer"}} 
                         >
-                            {column.label}
+                            {column.label} {this.renderSortIcon(column)}
                         </th>
                     )}
                 </tr>
