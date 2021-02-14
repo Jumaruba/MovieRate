@@ -5,16 +5,27 @@
     <a href="https://reactjs.org/"> 
       <img src="https://img.shields.io/badge/frontend-react-inactive&?style=for-the-badge&logo=react" alt="frontend-dev-react">
     </a> 
-    <a href="https://material-ui.com/"> 
-      <img src="https://img.shields.io/badge/DESIGN-MATERIAL--UI-red&?style=for-the-badge&logo=Material-UI" alt="design-material-ui"> 
+    <a href="https://getbootstrap.com/"> 
+      <img src="https://img.shields.io/badge/BOOTSTRAP-red&?style=for-the-badge&logo=bootstrap" alt="Bootstrap"> 
     </a> 
   </p>
 </p> 
 
 ## Dependencies 
-
+To run this application you must have the following programs installed: 
+- [`npm`](https://www.npmjs.com/) 
+- [`nodejs`](https://nodejs.org/) 
+- [`ReactJs`](https://reactjs.org)
 ## Installation 
-
+Clone the repo and run:   
+```bash
+$ npm install
+```
 ## How to run 
+Run the command: 
+```bash 
+$ npm start
+```
 
 ## Algorithms Used 
+- In order to sort the table I have used a modified version of `quick sort` in order to fit the data structure in the app. The algorithm can be checked at [sorting.js](https://github.com/Jumaruba/movie-rate/blob/main/src/utils/sorting.js) .
