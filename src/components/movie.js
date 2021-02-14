@@ -5,8 +5,6 @@ import paginate from '../utils/paginate';
 import Genres from './common/genres';
 import { getGenres } from '../services/fakeGenreService';
 import MoviesTable from './moviesTable';
-import quickSort from '../utils/sorting'; 
-import _ from 'lodash'; 
 import handleQuickSort from '../utils/sorting';
 
 
@@ -32,14 +30,7 @@ class Movie extends Component {
         return currentGenre === '0' ? movies : movies.filter(movie => movie.genre._id === currentGenre);
     }
 
-    handleSort = path => {
-        const sortColumn = {...this.state.sortColumn}; 
-        if (sortColumn.path === path) 
-            sortColumn.order = (sortColumn.order === 'asc') ? 'desc' : 'asc'; 
-        else {
-            sortColumn.path = path; 
-            sortColumn.order = 'asc'; 
-        }
+    handleSort = sortColumn => {
         this.setState({ sortColumn }); 
     }; 
 
@@ -76,6 +67,7 @@ class Movie extends Component {
             <React.Fragment>
                 <div className="row">
                     <div className="col-3">
+                    <br/><br/><br/>
                         <Genres
                             genres={genres}
                             currentGenre={currentGenre}
@@ -83,10 +75,11 @@ class Movie extends Component {
                         />
                     </div>
 
-                    <div className="col">
-                        <h1>Movies table</h1>
+                    <div className="col"> 
+                        <h1>Movies table </h1>
                         <MoviesTable
-                            movies={movies}
+                            movies={movies} 
+                            sortColumn={sortColumn}
                             onLike={this.handleLike}
                             onDelete={this.handleDelete}
                             onSort={this.handleSort}
