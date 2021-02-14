@@ -12,7 +12,7 @@ class TableBody extends Component {
             <tbody> 
             {data.map(item => (
                 <tr> 
-                    {columns.map(column => <td>{ this.renderCell(item, column) }</td>) }
+                    {columns.map(column => <td> {this.renderCell(item, column) }</td>) }
                 </tr>
  
             ))}
