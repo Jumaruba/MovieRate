@@ -6,7 +6,7 @@
       <img src="https://img.shields.io/badge/frontend-react-inactive&?style=for-the-badge&logo=react" alt="frontend-dev-react">
     </a> 
     <a href="https://getbootstrap.com/"> 
-      <img src="https://img.shields.io/badge/BOOTSTRAP-red&?style=for-the-badge&logo=bootstrap" alt="Bootstrap"> 
+      <img src="https://img.shields.io/badge/library-bootstrap-red&?style=for-the-badge&logo=bootstrap" alt="Bootstrap"> 
     </a> 
   </p>
 </p> 
