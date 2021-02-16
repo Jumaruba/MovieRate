@@ -1,5 +1,5 @@
 <p align="center"> 
-  <h3 align="center"> MOVIE-RATE </h3> 
+  <h3 align="center"> Movie Rate </h3> 
   <p align="center"> Ordinary movie list rating build with react and bootstrap </p> 
   <p align="center"> 
     <a href="https://reactjs.org/"> 
