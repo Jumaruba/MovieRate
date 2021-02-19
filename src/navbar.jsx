@@ -25,10 +25,10 @@ class NavBar extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-md navbar-dark fixed-top- bg-dark">
-        <Link className="navbar-brand">Vidly</Link>
+        <Link className="navbar-brand" to="/movies">Vidly</Link>
         <ul className="navbar-nav mr-auto">
           {this.state.barOptions.map((option) => (
-            <li className={this.getNavItemClass(option.name)} onClick={() => this.onOptionClick(option.name)}>
+            <li key={option.name} className={this.getNavItemClass(option.name)} onClick={() => this.onOptionClick(option.name)}>
               <Link className="nav-link" to={option.path}>{option.name}</Link>
             </li>
           ))}
