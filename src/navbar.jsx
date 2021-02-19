@@ -8,7 +8,8 @@ class NavBar extends Component {
       { name: "Movies", path: "/Movies" },
       { name: "Customers", path: "/Customers" },
       { name: "Rentals", path: "/Rentals" }, 
-      {name: "Login", path:"/login"} 
+      {name: "Login", path:"/login"},
+      {name: "Register", path:"/register"}
     ],
   }; 
 
