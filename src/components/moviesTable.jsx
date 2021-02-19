@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import Like from "./common/like";
 import Table from "./common/table";
+import {Link} from 'react-router-dom'; 
 
 class MoviesTable extends Component {
   columns = [
-    { path: "title", label: "Title" },
+    { path: "title", label: "Title", content: movie => <Link to={`/movies/${movie._id}`}>{movie.title}</Link>},
     { path: "genre.name", label: "Genre" },
     { path: "numberInStock", label: "In Stock" },
     { path: "dailyRentalRate", label: "Rate" },
@@ -34,7 +35,7 @@ class MoviesTable extends Component {
     if (movies.length === 0) return <p> No movies to display!</p>;
 
     return (
-      <Table
+      <Table 
         onSort={onSort}
         columns={this.columns}
         sortColumn={sortColumn}

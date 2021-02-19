@@ -29,13 +29,15 @@ class Movie extends Component {
         const { currentGenre, movies } = this.state;
         return currentGenre === '0' ? movies : movies.filter(movie => movie.genre._id === currentGenre);
     }
+    
     getPageData = (sortColumn, currentPage, pageSize) => {
         let moviesByGenre = this.getMoviesByGenre();    
         const sortedMovies = handleQuickSort(moviesByGenre, sortColumn.path, sortColumn.order); 
         return paginate(sortedMovies, currentPage, pageSize); 
 
 
-    }
+    } 
+
     handleSort = sortColumn => {
         this.setState({ sortColumn }); 
     }; 

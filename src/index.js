@@ -6,11 +6,9 @@ import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <main className="container">
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </main>
   </React.StrictMode>,
   document.getElementById("root")
 );
