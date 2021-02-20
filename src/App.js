@@ -22,8 +22,6 @@ const App = () => {
           <Route path="/register" component={RegisterForm} />
           <Route path="/login" component={LoginForm} />
           <Route path="/movies/:id" component={MovieForm} />
-          <Route path="/customers" component={Customers} />
-          <Route path="/rentals" component={Rentals} />
           <Route path="/not-found" component={NotFound} />
           <Route path="/movies" component={Movie} />
           <Redirect from="/" exact to="/movies" url="/movies" />

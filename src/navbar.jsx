@@ -6,8 +6,6 @@ class NavBar extends Component {
     activeOption: "Movies",
     barOptions: [
       { name: "Movies", path: "/Movies" },
-      { name: "Customers", path: "/Customers" },
-      { name: "Rentals", path: "/Rentals" }, 
       {name: "Login", path:"/login"},
       {name: "Register", path:"/register"}
     ],
