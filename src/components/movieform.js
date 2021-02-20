@@ -17,14 +17,19 @@ class MovieForm extends Form {
     errors: {},
   };
 
-  componentDidMount() {
-    const id = this.props.match.params.id;
+  componentDidMount() { 
+    const id = this.props.match.params.id;  
     const movie = getMovie(id);
-    const genres = getGenres();
-    if (movie) {
+    const genres = getGenres();   
+
+    // Unknown id 
+    if (!movie && id !== undefined) 
+        this.props.history.replace("/not-found");
+    else if (movie) {
       const data = this.getMovieData(movie);
       this.setState({ data });
-    }
+    } 
+
     this.setState({ genres });
 
   }
