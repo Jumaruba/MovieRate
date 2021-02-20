@@ -1,6 +1,6 @@
 <p align="center"> 
   <h3 align="center"> Movie Rate </h3> 
-  <p align="center"> Ordinary movie list rating build with react and bootstrap </p> 
+  <p align="center"> Ordinary movie list rating built with react and bootstrap </p> 
   <p align="center"> 
     <a href="https://reactjs.org/"> 
       <img src="https://img.shields.io/badge/frontend-react-inactive&?style=for-the-badge&logo=react" alt="frontend-dev-react">
