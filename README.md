@@ -31,10 +31,15 @@ $ npm start
 - In order to sort the table I have used a modified version of `quick sort` in order to fit the data structure in the app. The algorithm can be checked at [sorting.js](https://github.com/Jumaruba/movie-rate/blob/main/src/utils/sorting.js) .
 
 ## Things I'm still doing 
-- Forms to add more movies 
+- ~Forms to add more movies~
 - Backend Service 
 - Authentication 
+- Search bar 
+- Deploy
 
 ## Images 
 ![](https://i.imgur.com/WMrnbOn.png)
+
+## Still doing 
+
 
