@@ -39,6 +39,7 @@ $ npm start
 ![](https://i.imgur.com/WMrnbOn.png)
 
 ## Still doing 
-- [ ]Search bar 
-- [ ]Connect to backend
+- Search bar 
+- Connect to backend
+- Deploy
 
