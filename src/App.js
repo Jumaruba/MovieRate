@@ -8,8 +8,6 @@ import LoginForm from "./components/loginForm";
 import MovieForm from "./components/movieForm";
 import RegisterForm from "./components/registerForm";
 
-import Rentals from "./rentals";
-import Customers from "./Customers";
 
 const App = () => {
   return (
