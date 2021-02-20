@@ -1,13 +1,14 @@
 import { React } from "react";
 
-const DropInput = ({ name, options, error, label, value, ...rest }) => {
+const DropInput = ({ name, options, error, label, ...rest }) => {
   return (
     <div className="form-group">
       <label htmlFor={name}>{label} </label>
-      <select {...rest} value={value} name={name} id={name} className="form-control">
+      <select {...rest}  name={name} id={name} className="form-control"> 
+        <option value="" /> 
         {options.map((option) => (
-          <option key={option} value={option} >
-            {option}
+          <option key={option._id} value={option._id}>
+            {option.name}
           </option>
         ))}
       </select>

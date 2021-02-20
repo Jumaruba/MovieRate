@@ -2,64 +2,69 @@ import React from "react";
 import Form from "./common/form/form";
 import Joi from "joi-browser";
 import { getGenres } from "../services/fakeGenreService";
-import { getMovie } from './../services/fakeMovieService';
+import { getMovie, saveMovie } from "./../services/fakeMovieService";
 
 class MovieForm extends Form {
   state = {
     data: {
+      _id: "",
       title: "",
-      genre: "",
-      inStock: "",
-      rate: "",
+      genreId: "",
+      numberInStock: "",
+      dailyRentalRate: "",
     },
-    genres: [], 
+    genres: [],
     errors: {},
-  }; 
+  };
 
-  componentDidMount(){      
-      const id = this.props.match.params.id;  
-      const movie = this.getMovieData(getMovie(id));  
-      const genres = getGenres().map(genres => (genres.name)); 
-      this.setState({genres: genres, data: movie});   
-      
-  } 
-
-  getMovieData(movie){
-      return {
-          title: movie.title, 
-          genre: movie.genre.name, 
-          inStock: movie.numberInStock, 
-          rate: movie.dailyRentalRate
-      }
+  componentDidMount() {
+    const id = this.props.match.params.id;
+    const movie = this.getMovieData(getMovie(id));
+    const genres = getGenres();
+    this.setState({ genres: genres, data: movie });
   }
 
+  getMovieData(movie) {
+    return {
+      _id: movie._id,
+      title: movie.title,
+      genreId: movie.genre._id ,
+      numberInStock: movie.numberInStock,
+      dailyRentalRate: movie.dailyRentalRate,
+    };
+  }
+
+  saveCurrentMovie = (e) => {
+    e.preventDefault(); 
+    saveMovie(this.state.data);
+  }; 
 
   schema = {
+    _id: Joi.string().required(), 
     title: Joi.string().required().label("Title"),
-    genre: Joi.string().required().label("Genre"),
-    inStock: Joi.number()
+    genreId: Joi.string().required().label("Genre"),
+    numberInStock: Joi.number()
       .min(0)
       .max(100)
       .integer()
       .required()
       .label("In Stock"),
-    rate: Joi.number().min(0).max(5).required().label("Rate"),
+    dailyRentalRate: Joi.number().min(0).max(5).required().label("Rate"),
   };
 
-  
-  render() {
-      
-    const { genres } = this.state; 
+  render() { 
 
-    return ( 
+    const { genres } = this.state;
+
+    return (
       <div>
         <h1>Movie Form </h1>
-        <form>
-            {this.renderInput("title", "Title")}
-            {this.renderDropInput("genre", genres, "Genre")} 
-            {this.renderInput("inStock", "In Stock")}
-            {this.renderInput("rate", "Rate")}
-            {this.renderButton("Save")}
+        <form onSubmit={this.saveCurrentMovie}>
+          {this.renderInput("title", "Title")}
+          {this.renderDropInput("genreId", genres, "Genre")}
+          {this.renderInput("numberInStock", "In Stock")}
+          {this.renderInput("dailyRentalRate", "Rate")}     
+          {this.renderButton("Save")}
         </form>
       </div>
     );

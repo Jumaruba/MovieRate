@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
 import DropInput from './dropInput';
+import _ from 'lodash'; 
 
 class Form extends Component {
   state = {
@@ -23,7 +24,7 @@ class Form extends Component {
   validateProperty = ({ name, value }) => {
     const obj = { [name]: value };
     const schema = { [name]: this.schema[name] };
-    const { error } = Joi.validate(obj, schema);
+    const { error } = Joi.validate(obj, schema); 
     return error ? error.details[0].message : null;
   };
 
@@ -73,15 +74,14 @@ class Form extends Component {
     );
   } 
 
-  renderDropInput(name, options, label, type = "text" ){
-    const { data, errors} = this.state; 
+  renderDropInput(name, options, label ){
+    const { data, errors } = this.state;  
     return (
       <DropInput 
         name={name} 
         options={options}
         error={errors[name]} 
         label={label}
-        type={type}  
         value={data[name]}
         onChange={this.handleChange} 
       />
