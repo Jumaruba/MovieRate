@@ -34,7 +34,7 @@ $ npm start
 - ~Forms to add more movies~
 - Backend Service 
 - Authentication 
-- Search bar 
+- ~Search bar~
 - Deploy
 
 ## Images 
