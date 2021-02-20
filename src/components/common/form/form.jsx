@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
+import DropInput from './dropInput';
 
 class Form extends Component {
   state = {
@@ -57,7 +58,7 @@ class Form extends Component {
       </button>
     );
   }
-
+  
   renderInput(name, label, type = "text") {
     const { data, errors } = this.state;
 
@@ -71,6 +72,21 @@ class Form extends Component {
         error={errors[name]}
       ></Input>
     );
+  } 
+
+  renderDropInput(name, options, label, type = "text" ){
+    const { data, errors} = this.state; 
+    return (
+      <DropInput 
+        name={name} 
+        options={options}
+        error={errors[name]} 
+        label={label}
+        type={type}  
+        value={data[name]}
+        onChange={this.handleChange} 
+      />
+    ); 
   }
 }
 

@@ -1,6 +1,5 @@
-import React, { Component } from "react";
-import Form from "./common/form";
-import Input from "./common/input";
+import React  from "react";
+import Form from "./common/form/form";
 import Joi from "joi-browser";
 
 class RegisterForm extends Form {
@@ -25,7 +24,7 @@ class RegisterForm extends Form {
       <div>
         <h1>Register Form</h1>
         <form onSubmit={this.handleSubmit}>
-          {this.renderInput("username", "Username", "email")}
+          {this.renderInput("username", "Username")}
           {this.renderInput("password", "Password", "password")}
           {this.renderInput("name", "Name", "name")}
           {this.renderButton("Register")}
