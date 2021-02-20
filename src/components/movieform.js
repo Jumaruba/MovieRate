@@ -26,6 +26,7 @@ class MovieForm extends Form {
       this.setState({ data });
     }
     this.setState({ genres });
+
   }
 
   getMovieData(movie) {
@@ -40,7 +41,9 @@ class MovieForm extends Form {
 
   saveCurrentMovie = (e) => {
     e.preventDefault();
-    saveMovie(this.state.data);
+    saveMovie(this.state.data); 
+
+    this.props.history.push("/movies");
   };
 
   schema = {

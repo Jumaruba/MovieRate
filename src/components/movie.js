@@ -101,9 +101,10 @@ class Movie extends Component {
               onDelete={this.handleDelete}
               onSort={this.handleSort}
             />
-            <Link to="/movies/new">
-              <button className="btn btn-primary">Add movie</button>
+            <Link to="/movies/new" >
+              <button style={{marginBottom: "1em"}} className="btn btn-primary">Add movie</button>
             </Link>
+
             <Pagination
               itemsCount={count}
               pageSize={pageSize}
