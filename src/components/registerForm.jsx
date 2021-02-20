@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Form from "./common/form";
 import Input from "./common/input";
-import  Joi  from 'joi-browser'; 
+import Joi from "joi-browser";
 
 class RegisterForm extends Form {
   state = {
@@ -11,21 +11,24 @@ class RegisterForm extends Form {
 
   // TODO: create schema
   schema = {
-    username: Joi.string().required().label("Username"),
-    password: Joi.string().required().label("Password"),  
-    name: Joi.string().required().label("Name"), 
-    
-  }
+    username: Joi.string().required().email().label("Username"),
+    password: Joi.string().required().label("Password").min(5),
+    name: Joi.string().required().label("Name"),
+  };
+
+  doSubmit = () => {
+    console.log("Registered");
+  };
 
   render() {
     return (
       <div>
         <h1>Register Form</h1>
         <form onSubmit={this.handleSubmit}>
-            {this.renderInput("username", "Username")} 
-            {this.renderInput("password", "Password", "password")}
-            {this.renderInput("name", "Name", "name")}
-            {this.renderButton("Register")}
+          {this.renderInput("username", "Username", "email")}
+          {this.renderInput("password", "Password", "password")}
+          {this.renderInput("name", "Name", "name")}
+          {this.renderButton("Register")}
         </form>
       </div>
     );
