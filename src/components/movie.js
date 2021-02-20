@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import Pagination from "./common/pagination";
-import paginate from "../utils/paginate";
 import Genres from "./common/genres";
+import SearchBar from "./common/searchBar";
+import paginate from "../utils/paginate";
 import { getGenres } from "../services/fakeGenreService";
 import MoviesTable from "./moviesTable";
 import handleQuickSort from "../utils/sorting";
-import { Link } from 'react-router-dom'; 
+import { Link } from "react-router-dom";
 
 class Movie extends Component {
   state = {
@@ -15,6 +16,7 @@ class Movie extends Component {
     pageSize: 4,
     currentPage: 1,
     currentGenre: "0",
+    searchQuery: "",
     sortColumn: { path: "title", order: "asc" },
   };
 
@@ -33,9 +35,16 @@ class Movie extends Component {
   };
 
   getPageData = (sortColumn, currentPage, pageSize) => {
-    let moviesByGenre = this.getMoviesByGenre();
+    const { movies, searchQuery } = this.state;
+    let filtered = movies;
+    if (searchQuery)
+      filtered = movies.filter( m =>
+        m.title.toLowerCase().startsWith(searchQuery.toLowerCase())
+      );
+    else filtered = this.getMoviesByGenre();
+
     const sortedMovies = handleQuickSort(
-      moviesByGenre,
+      filtered,
       sortColumn.path,
       sortColumn.order
     );
@@ -64,9 +73,12 @@ class Movie extends Component {
   };
 
   handleGenreChange = (genre) => {
-    this.setState({ currentGenre: genre._id });
+    this.setState({ currentGenre: genre._id, searchQuery: "", currentPage: 1 });
   };
 
+  handleSearch = (query) => {
+    this.setState({ searchQuery: query, currentGenre: null, currentPage: 1 });
+  };
   render() {
     const { length: count } = this.getMoviesByGenre();
     const {
@@ -75,6 +87,7 @@ class Movie extends Component {
       currentGenre,
       genres,
       sortColumn,
+      searchQuery,
     } = this.state;
 
     const movies = this.getPageData(sortColumn, currentPage, pageSize);
@@ -94,6 +107,8 @@ class Movie extends Component {
 
           <div className="col">
             <h1>Movies table </h1>
+
+            <SearchBar value={searchQuery} onChange={this.handleSearch} />
             <MoviesTable
               movies={movies}
               sortColumn={sortColumn}
@@ -101,8 +116,13 @@ class Movie extends Component {
               onDelete={this.handleDelete}
               onSort={this.handleSort}
             />
-            <Link to="/movies/new" >
-              <button style={{marginBottom: "1em"}} className="btn btn-primary">Add movie</button>
+            <Link to="/movies/new">
+              <button
+                style={{ marginBottom: "1em" }}
+                className="btn btn-primary"
+              >
+                Add movie
+              </button>
             </Link>
 
             <Pagination
