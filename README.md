@@ -38,3 +38,7 @@ $ npm start
 ## Images 
 ![](https://i.imgur.com/WMrnbOn.png)
 
+## Still doing 
+- []Search bar 
+- []Connect to backend
+
